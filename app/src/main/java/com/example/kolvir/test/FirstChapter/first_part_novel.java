@@ -21,7 +21,7 @@ public class first_part_novel extends AppCompatActivity{
 
     public void onTouch(View view){
         text.setText(R.string.dummy_button); // for test
-        //TODO тута нужно делать подгрузку текста и выводить его + надо следить за сменой Image
+        //TODO тута нужно делать подгрузку текста и выводить его + надо следить за сменой image
     }
 
 }
