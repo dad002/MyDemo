@@ -63,10 +63,10 @@ public class MainActivity extends AppCompatActivity {
     }
     private void stopPlay() {
         if (!mute_index) {
-            mPlayer.stop();
+            mPlayer.pause();
             mute_index = true;
         }
-        if(mute_index){
+        else{
             mPlayer.start();
             mute_index = false;
         }
