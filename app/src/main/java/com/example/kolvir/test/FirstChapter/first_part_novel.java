@@ -1,5 +1,6 @@
 package com.example.kolvir.test.FirstChapter;
 
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -16,6 +17,7 @@ public class first_part_novel extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first_part_novel);
 
+
         text = (TextView) findViewById(R.id.MainText);
     }
 
@@ -23,5 +25,8 @@ public class first_part_novel extends AppCompatActivity{
         text.setText(R.string.dummy_button); // for test
         //TODO тута нужно делать подгрузку текста и выводить его + надо следить за сменнной image
     }
+
+
+
 
 }
