@@ -9,6 +9,7 @@ package com.example.kolvir.test;
         import android.media.SoundPool;
         import android.support.v7.app.AppCompatActivity;
         import android.os.Bundle;
+        import android.util.Log;
         import android.view.View;
         import android.widget.Button;
 
@@ -20,6 +21,7 @@ package com.example.kolvir.test;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String TAG="MyApp";
     MediaPlayer mPlayer;
     private boolean mute_index = false;
 
@@ -28,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Log.i(TAG, "onCreate");
 
         mPlayer = MediaPlayer.create(this, R.raw.music);
         mPlayer.start();
@@ -73,15 +77,42 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
     @Override
     protected void onPause() {
         super.onPause();
-        mPlayer.stop();
+        Log.i(TAG, "onPause");
+        mPlayer.pause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.i(TAG, "onResume");
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.i(TAG, "onStart");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.i(TAG, "onStop");
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.i(TAG, "onRestart");
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        Log.i(TAG, "onDestroy");
         if (mPlayer.isPlaying()){
             stopPlay();
         }
