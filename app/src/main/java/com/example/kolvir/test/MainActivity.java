@@ -13,9 +13,7 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean MUTE_INDEX = false;
 
-
     MediaPlayer mPlayer;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

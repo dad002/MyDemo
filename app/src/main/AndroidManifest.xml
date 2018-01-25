@@ -21,7 +21,12 @@ package="com.example.kolvir.test">
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
     </activity>
+
     <activity android:name=".FirstChapter.first_part_novel"
+        android:screenOrientation="landscape">
+    </activity>
+
+    <activity android:name=".FirstChapter.room_first"
         android:screenOrientation="landscape">
 
     </activity>

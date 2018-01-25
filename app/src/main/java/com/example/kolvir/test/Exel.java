@@ -8,29 +8,56 @@ import java.io.IOException;
 
 public class Exel {
 
-    String res;
+    private int row;
+    private int cell;
+    private int sheet;
 
-    public Exel(AssetManager am) throws Exception {
+    private HSSFWorkbook wb = null;
 
-        int row;
-        int cell;
+    public Exel(AssetManager am,int chapterName) throws Exception {
 
-        HSSFWorkbook wb = null;
         try{
             wb = new HSSFWorkbook(am.open("exel.xls"));
         } catch (IOException e){
             e.printStackTrace();
         }
-        row = 0;
-        cell = 0;
+
+        sheet = chapterName;
     }
 
-    public String CreateNames(){
+    public String Print(){
+
+        String acIndex =CreateResIndex();
+
+        String res = acIndex + "%" +CreateNames() + "%" + CreateMessage();
+        if (!acIndex.equals("3.0")){
+            row+=1;
+        }
 
         return res;
     }
 
-    public String Print(){
+    private String CreateNames(){
+        String res = wb.getSheetAt(sheet).getRow(row).getCell(cell+1).toString();
+        if (res == null){
+            return " ";
+        }else{
+            return res;
+        }
+    }
+
+    private String CreateMessage(){
+        String res = wb.getSheetAt(sheet).getRow(row).getCell(cell+2).toString();
+
+        if (res == null){
+            return " ";
+        }else{
+            return res;
+        }
+    }
+
+    private String CreateResIndex(){
+        String res = wb.getSheetAt(sheet).getRow(row).getCell(cell).toString();
         return res;
     }
 }
