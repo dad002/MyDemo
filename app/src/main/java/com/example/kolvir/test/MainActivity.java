@@ -13,7 +13,7 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean MUTE_INDEX = false;
 
-
+    private boolean IS_PLAYING = false;
     MediaPlayer mPlayer;
 
 
@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
         mPlayer = MediaPlayer.create(this, R.raw.music);
         mPlayer.start();
+        IS_PLAYING = true;
     }
 
     public void onClick(View view){
@@ -59,6 +60,12 @@ public class MainActivity extends AppCompatActivity {
             mPlayer.start();
             MUTE_INDEX = false;
         }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mPlayer.pause();
     }
 
     @Override
