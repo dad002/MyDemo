@@ -1,7 +1,7 @@
 package com.example.kolvir.test;
 
+import android.content.Context;
 import android.content.Intent;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -10,22 +10,13 @@ import com.example.kolvir.test.FirstChapter.first_part_novel;
 import com.example.kolvir.test.Gallery.Gallery;
 
 public class MainActivity extends AppCompatActivity {
-
-    private boolean MUTE_INDEX = false;
-
-    private boolean IS_PLAYING = false;
-    MediaPlayer mPlayer;
-
-
+    PlayList playList = new PlayList();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        mPlayer = MediaPlayer.create(this, R.raw.music);
-        mPlayer.start();
-        IS_PLAYING = true;
+        playList.createPlayList(this);
     }
 
     public void onClick(View view){
@@ -46,33 +37,26 @@ public class MainActivity extends AppCompatActivity {
                     //TODO активити с опциями
                 break;
             case R.id.BSound:
-                   stopPlay();
+                    playList.stopPlay();
+                    System.out.print(playList.IS_PLAIYNG);
                 break;
-        }
-    }
-
-    private void stopPlay() {
-        if (!MUTE_INDEX) {
-            mPlayer.pause();
-            MUTE_INDEX = true;
-        }
-        else{
-            mPlayer.start();
-            MUTE_INDEX = false;
         }
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        mPlayer.pause();
+        playList.stop();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (mPlayer.isPlaying()){
-            stopPlay();
+
+        if (playList.isPlaying()){
+            playList.stopPlay();
         }
     }
+
+
 }
