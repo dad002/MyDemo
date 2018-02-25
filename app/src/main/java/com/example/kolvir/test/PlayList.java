@@ -1,12 +1,9 @@
 package com.example.kolvir.test;
 
-/**
- * Created by kulik on 16.02.2018.
- */
-import android.app.Service;
 import android.content.Context;
 import android.media.MediaPlayer;
 
+import com.example.kolvir.test.R;
 import java.util.Random;
 
 
