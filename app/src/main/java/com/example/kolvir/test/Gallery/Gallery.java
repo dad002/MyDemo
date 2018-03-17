@@ -8,7 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import com.example.kolvir.test.R;
-
+//ааааааааааааааааа бля
 public class Gallery extends AppCompatActivity {
 
     RecyclerView recyclerView;
