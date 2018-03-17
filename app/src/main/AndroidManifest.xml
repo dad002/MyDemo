@@ -28,9 +28,8 @@
         <activity
             android:name=".FirstChapter.room_first"
             android:screenOrientation="landscape" />
-        <activity
-            android:name=".Gallery.Gallery"
-            android:screenOrientation="landscape" />
+        <activity android:name=".Gallery.Gallery"
+            android:screenOrientation="landscape"/>
 
 
         <service android:enabled="true" android:name=".Services.MyMusicService" />
