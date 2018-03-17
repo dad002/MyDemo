@@ -14,7 +14,7 @@ import com.example.kolvir.test.R;
 
 import java.util.ArrayList;
 import java.util.List;
-
+// ЕБлан ускозадый
 
 public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PhotosViewHolder>{
 
