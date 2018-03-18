@@ -1,27 +1,34 @@
 package com.example.kolvir.test.Gallery;
 
-import android.graphics.BitmapFactory;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.content.Context;
+        import android.support.annotation.NonNull;
+        import android.support.v7.widget.RecyclerView;
+        import android.util.Log;
+        import android.view.LayoutInflater;
+        import android.view.View;
+        import android.view.ViewGroup;
+        import android.widget.ImageView;
+        import android.widget.TextView;
 
+        import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.kolvir.test.R;
 
-import java.util.ArrayList;
-import java.util.List;
+        import java.util.ArrayList;
+        import java.util.List;
 // ЕБлан ускозадый
 
 public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PhotosViewHolder>{
 
-    String TAGRV = "RVINFO";
+    private Context cont;
+    private String TAGRV = "RVINFO";
     private List<Chapters> chaptersList = new ArrayList<>();
 
-    public void addAll(List<Chapters> chapters){
+    public RVAdapter(Context context){
+        cont = context;
+    }
+
+     public  void addAll(List<Chapters> chapters){
         Log.i(TAGRV,"InAddAll");
 
         int pos = getItemCount();
@@ -57,12 +64,20 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PhotosViewHolder>{
         public PhotosViewHolder(View itemView) {
             super(itemView);
             Log.i(TAGRV,"InPhotosViewHolder");
-            name = (TextView) itemView.findViewById(R.id.title);
-            images = (ImageView) itemView.findViewById(R.id.image);
+            name =  itemView.findViewById(R.id.title);
+            images =  itemView.findViewById(R.id.image);
         }
 
         public void bind(Chapters chapters){
-            images.setImageBitmap(BitmapFactory.decodeResource(itemView.getResources(), chapters.getImage()));
+
+            Glide
+                    .with(cont)
+                    .load(chapters.getImage())
+                    .thumbnail(0.2f)
+                    .crossFade()
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(images);
+
             name.setText(chapters.getName());
         }
     }

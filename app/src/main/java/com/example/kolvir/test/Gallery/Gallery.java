@@ -8,7 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import com.example.kolvir.test.R;
-//ааааааааааааааааа бля
 public class Gallery extends AppCompatActivity {
 
     RecyclerView recyclerView;
@@ -27,7 +26,7 @@ public class Gallery extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.rv);
         recyclerView.setHasFixedSize(true);
 
-        adapter = new RVAdapter();
+        adapter = new RVAdapter(this);
         recyclerView.setAdapter(adapter);
         adapter.addAll(Chapters.getChapters());
 
