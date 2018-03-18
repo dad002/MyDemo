@@ -7,7 +7,7 @@ import android.content.Context;
         import android.view.LayoutInflater;
         import android.view.View;
         import android.view.ViewGroup;
-        import android.widget.ImageView;
+import android.widget.ImageView;
         import android.widget.TextView;
 
         import com.bumptech.glide.Glide;
@@ -16,7 +16,6 @@ import com.example.kolvir.test.R;
 
         import java.util.ArrayList;
         import java.util.List;
-// ЕБлан ускозадый
 
 public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PhotosViewHolder>{
 
@@ -49,12 +48,16 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PhotosViewHolder>{
     public void onBindViewHolder(@NonNull RVAdapter.PhotosViewHolder holder, int position) {
         Log.i(TAGRV,"InBindViewHolder");
         holder.bind(chaptersList.get(position));
+
+        holder.images.setAlpha(0f);
+        holder.images.animate().setDuration(500).alpha(1f).start();
     }
 
     @Override
     public int getItemCount() {
         return chaptersList.size();
     }
+
 
     public class PhotosViewHolder extends RecyclerView.ViewHolder {
 
@@ -67,6 +70,8 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PhotosViewHolder>{
             name =  itemView.findViewById(R.id.title);
             images =  itemView.findViewById(R.id.image);
         }
+
+
 
         public void bind(Chapters chapters){
 

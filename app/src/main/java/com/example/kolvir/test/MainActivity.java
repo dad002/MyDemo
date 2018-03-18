@@ -58,22 +58,25 @@ public class MainActivity extends AppCompatActivity {
         switch (view.getId()){
             case R.id.BPlay:
                     intent = new Intent(this,first_part_novel.class);
+                    view.clearAnimation();
                     startActivity(intent);
-
                 break;
             case R.id.BContinue:
+                    view.clearAnimation();
                     //TODO позволяет сделать выбор комнаты с которой надо будет начать
                 break;
             case R.id.BGallery:
                 Log.i(TAG,"GOGOGO");
                     intent = new Intent(this,Gallery.class);
+                    view.clearAnimation();
                     startActivity(intent);
                 break;
             case R.id.BOptions:
+                    view.clearAnimation();
                 break;
             case R.id.BSound:
-
-                stopService(new Intent(this, MyMusicService.class));
+                    view.clearAnimation();
+                    stopService(new Intent(this, MyMusicService.class));
                 break;
         }
     }
