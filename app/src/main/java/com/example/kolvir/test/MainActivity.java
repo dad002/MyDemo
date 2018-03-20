@@ -1,6 +1,7 @@
 package com.example.kolvir.test;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.example.kolvir.test.FirstChapter.first_part_novel;
 import com.example.kolvir.test.Gallery.Gallery;
 import com.example.kolvir.test.Services.MyMusicService;
@@ -43,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         imageGallery = findViewById(R.id.BGallery);
         imageAboutUs = findViewById(R.id.BOptions);
         imageSound = findViewById(R.id.BSound);
+
         setOnTouch(imagePlay);
         setOnTouch(imageContinue);
         setOnTouch(imageGallery);
@@ -50,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
         setOnTouch(imageSound);
 
         startService(new Intent(this, MyMusicService.class));
-        //playList.createPlayList(this);
     }
 
     public void onClick(View view){

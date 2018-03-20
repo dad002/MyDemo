@@ -35,9 +35,9 @@ public class Chapters {
     public static List<Chapters> getChapters(){
         ArrayList<Chapters> items = new ArrayList<>();
 
-        items.add(new Chapters("Chapter1", R.mipmap.forfirst1));
-        items.add(new Chapters("Chapter2", R.mipmap.forsecond1));
-        items.add(new Chapters("Chapter3", R.mipmap.test1));
+        items.add(new Chapters("Chapter1", R.drawable.forfirst1));
+        items.add(new Chapters("Chapter2", R.drawable.forsecond1));
+        items.add(new Chapters("Chapter3", R.drawable.test1));
 
         return items;
     }
