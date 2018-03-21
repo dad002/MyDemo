@@ -1,10 +1,15 @@
 package com.example.kolvir.test;
 
 
+import android.content.ComponentName;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.AnimationDrawable;
+import android.content.ServiceConnection;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -14,10 +19,11 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
 import com.example.kolvir.test.FirstChapter.first_part_novel;
 import com.example.kolvir.test.Gallery.Gallery;
-import com.example.kolvir.test.Services.MyMusicService;
+import com.example.kolvir.test.Services.MusicService;
+
+import java.util.ArrayList;
 
 //TODO 1. Анимация плохо работает с галреей + она глючит при обратном выходе из приложения
 //TODO 2. Разобраться с сервисами и делать паузу а не стоп при переходе в многозадачкость и когда сворачиваем
@@ -32,6 +38,11 @@ public class MainActivity extends AppCompatActivity {
     ImageView imageAboutUs;
     ImageView imageSound;
 
+
+    private ArrayList<Song> songList;
+    private MusicService musicSrv;
+    private Intent playIntent;
+    private boolean musicBound=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +63,54 @@ public class MainActivity extends AppCompatActivity {
         setOnTouch(imageAboutUs);
         setOnTouch(imageSound);
 
-        startService(new Intent(this, MyMusicService.class));
+    }
+    private ServiceConnection musicConnection = new ServiceConnection(){
+
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            MusicService.MusicBinder binder = (MusicService.MusicBinder)service;
+            //get service
+            musicSrv = binder.getService();
+            //pass list
+            musicSrv.setList(songList);
+            musicBound = true;
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            musicBound = false;
+        }
+    };
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if(playIntent==null){
+            playIntent = new Intent(this, MusicService.class);
+            bindService(playIntent, musicConnection, Context.BIND_AUTO_CREATE);
+            startService(playIntent);
+        }
+    }
+    public void getSongList() {
+        //retrieve song info
+        ContentResolver musicResolver = getContentResolver();
+        Uri musicUri = android.provider.MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
+        Cursor musicCursor = musicResolver.query(musicUri, null, null, null, null);
+
+        if(musicCursor!=null && musicCursor.moveToFirst()){
+            //get column
+            int idColumn = musicCursor.getColumnIndex
+                    (android.provider.MediaStore.Audio.Media._ID);
+            //add songs to list
+            do {
+                long thisId = musicCursor.getLong(idColumn);
+                songList.add(new Song(thisId));
+            }
+            while (musicCursor.moveToNext());
+        }
+    }
+    public void songPicked(View view){
+        musicSrv.setSong(Integer.parseInt(view.getTag().toString()));
+        musicSrv.playSong();
     }
 
     public void onClick(View view){
@@ -78,7 +136,8 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.BSound:
                     view.clearAnimation();
-                    stopService(new Intent(this, MyMusicService.class));
+                    stopService(playIntent);
+                    musicSrv=null;
                 break;
         }
     }
@@ -96,21 +155,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        stopService(new Intent(this, MyMusicService.class));
-    }
-
-    @Override
-    protected void onUserLeaveHint() {
-        super.onUserLeaveHint();
-        stopService(new Intent(this,MyMusicService.class));
-    }
-
-    @Override
     public boolean onKeyLongPress(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_MENU) {
-            stopService(new Intent(this,MyMusicService.class));
+
+        }
+        if (keyCode == KeyEvent.KEYCODE_BACK){
+
         }
         return super.onKeyLongPress(keyCode, event);
     }

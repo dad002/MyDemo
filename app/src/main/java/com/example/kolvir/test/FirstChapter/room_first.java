@@ -1,5 +1,6 @@
 package com.example.kolvir.test.FirstChapter;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -7,11 +8,18 @@ import android.support.v7.app.AppCompatActivity;
 import com.example.kolvir.test.R;
 
 
-
 public class room_first extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_room_first);
+    }
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if (hasFocus){
+            stopService(new Intent(this, MyMusicService.class));
+        }
+        else {startService(new Intent(this, MyMusicService.class));}
     }
 }
