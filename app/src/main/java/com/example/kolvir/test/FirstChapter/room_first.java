@@ -14,12 +14,4 @@ public class room_first extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_room_first);
     }
-    @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        super.onWindowFocusChanged(hasFocus);
-        if (hasFocus){
-            stopService(new Intent(this, MyMusicService.class));
-        }
-        else {startService(new Intent(this, MyMusicService.class));}
-    }
 }

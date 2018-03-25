@@ -18,10 +18,11 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.kolvir.test.FirstChapter.first_part_novel;
 import com.example.kolvir.test.Gallery.Gallery;
-import com.example.kolvir.test.Services.MusicService;
+import com.example.kolvir.test.Services.MyMusicService;
 
 import java.util.ArrayList;
 
@@ -37,12 +38,6 @@ public class MainActivity extends AppCompatActivity {
     ImageView imageGallery;
     ImageView imageAboutUs;
     ImageView imageSound;
-
-
-    private ArrayList<Song> songList;
-    private MusicService musicSrv;
-    private Intent playIntent;
-    private boolean musicBound=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,54 +58,8 @@ public class MainActivity extends AppCompatActivity {
         setOnTouch(imageAboutUs);
         setOnTouch(imageSound);
 
-    }
-    private ServiceConnection musicConnection = new ServiceConnection(){
+        startService(new Intent(this, MyMusicService.class));
 
-        @Override
-        public void onServiceConnected(ComponentName name, IBinder service) {
-            MusicService.MusicBinder binder = (MusicService.MusicBinder)service;
-            //get service
-            musicSrv = binder.getService();
-            //pass list
-            musicSrv.setList(songList);
-            musicBound = true;
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName name) {
-            musicBound = false;
-        }
-    };
-    @Override
-    protected void onStart() {
-        super.onStart();
-        if(playIntent==null){
-            playIntent = new Intent(this, MusicService.class);
-            bindService(playIntent, musicConnection, Context.BIND_AUTO_CREATE);
-            startService(playIntent);
-        }
-    }
-    public void getSongList() {
-        //retrieve song info
-        ContentResolver musicResolver = getContentResolver();
-        Uri musicUri = android.provider.MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
-        Cursor musicCursor = musicResolver.query(musicUri, null, null, null, null);
-
-        if(musicCursor!=null && musicCursor.moveToFirst()){
-            //get column
-            int idColumn = musicCursor.getColumnIndex
-                    (android.provider.MediaStore.Audio.Media._ID);
-            //add songs to list
-            do {
-                long thisId = musicCursor.getLong(idColumn);
-                songList.add(new Song(thisId));
-            }
-            while (musicCursor.moveToNext());
-        }
-    }
-    public void songPicked(View view){
-        musicSrv.setSong(Integer.parseInt(view.getTag().toString()));
-        musicSrv.playSong();
     }
 
     public void onClick(View view){
@@ -136,8 +85,6 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.BSound:
                     view.clearAnimation();
-                    stopService(playIntent);
-                    musicSrv=null;
                 break;
         }
     }
@@ -155,12 +102,25 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onKeyLongPress(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_MENU) {
+    public void onBackPressed() {
+        stopService(new Intent(this, MyMusicService.class));
+        super.onBackPressed();
+    }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_MENU){
+            Toast.makeText(this,"stop",Toast.LENGTH_SHORT).show();
+            stopService(new Intent(this, MyMusicService.class));
         }
-        if (keyCode == KeyEvent.KEYCODE_BACK){
+        return super.onKeyDown(keyCode, event);
+    }
 
+    @Override
+    public boolean onKeyLongPress(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_HOME) {
+            Toast.makeText(this,"yes",Toast.LENGTH_SHORT).show();
+            stopService(new Intent(this, MyMusicService.class));
         }
         return super.onKeyLongPress(keyCode, event);
     }
