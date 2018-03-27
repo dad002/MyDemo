@@ -25,9 +25,10 @@ public class Exel {
         sheet = chapterName;
     }
 
-    public String Print(){
-
-        String acIndex =CreateResIndex();
+    public String Print(int rowStatus){
+        if (rowStatus == 1) row -= 1;
+        if (row < 0) row = 0;
+        String acIndex = CreateResIndex();
 
         String res = acIndex + "%" +CreateNames() + "%" + CreateMessage();
         if (!acIndex.equals("3.0")){

@@ -1,15 +1,8 @@
 package com.example.kolvir.test;
 
 
-import android.content.ComponentName;
-import android.content.ContentResolver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.ServiceConnection;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -23,8 +16,6 @@ import android.widget.Toast;
 import com.example.kolvir.test.FirstChapter.first_part_novel;
 import com.example.kolvir.test.Gallery.Gallery;
 import com.example.kolvir.test.Services.MyMusicService;
-
-import java.util.ArrayList;
 
 //TODO 1. Анимация плохо работает с галреей + она глючит при обратном выходе из приложения
 //TODO 2. Разобраться с сервисами и делать паузу а не стоп при переходе в многозадачкость и когда сворачиваем
@@ -44,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        animButton = AnimationUtils.loadAnimation(this,R.anim.menu_button);
+        animButton = AnimationUtils.loadAnimation(this,R.anim.button_anim);
 
         imagePlay = findViewById(R.id.BPlay);
         imageContinue = findViewById(R.id.BContinue);
@@ -58,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         setOnTouch(imageAboutUs);
         setOnTouch(imageSound);
 
-        startService(new Intent(this, MyMusicService.class));
+        //startService(new Intent(this, MyMusicService.class));
 
     }
 
@@ -69,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
                     intent = new Intent(this,first_part_novel.class);
                     view.clearAnimation();
                     startActivity(intent);
+                    overridePendingTransition(R.anim.botton_in,R.anim.top_out);
                 break;
             case R.id.BContinue:
                     view.clearAnimation();
