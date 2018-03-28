@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     ImageView imageGallery;
     ImageView imageAboutUs;
     ImageView imageSound;
+    MyMusicService mmS = new MyMusicService();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +79,12 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.BSound:
                     view.clearAnimation();
+                    if (mmS.play_index){
+                        mmS.onPause();
+                    }
+                    else {
+                        mmS.onRelease();
+                    }
                 break;
         }
     }

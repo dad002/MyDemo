@@ -12,6 +12,7 @@ import com.example.kolvir.test.R;
 public class MyMusicService extends Service{
 
     private static final String TAG = null;
+    public boolean play_index = false;
     MediaPlayer player;
 
     public IBinder onBind(Intent arg0){
@@ -28,6 +29,7 @@ public class MyMusicService extends Service{
 
     public int onStartCommand(Intent intent, int flags, int startId){
         player.start();
+        play_index = true;
         return Service.START_STICKY;
     }
 
@@ -43,7 +45,11 @@ public class MyMusicService extends Service{
 
     }
     public void onPause(){
+        player.pause();
 
+    }
+    public void onRelease(){
+        player.release();
     }
 
     @Override
