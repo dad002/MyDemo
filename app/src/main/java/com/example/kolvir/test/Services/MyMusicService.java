@@ -11,32 +11,49 @@ import com.example.kolvir.test.R;
 
 public class MyMusicService extends Service{
 
+    private static final String TAG = null;
     MediaPlayer player;
 
-    @Override
-    public IBinder onBind(Intent intent) {
+    public IBinder onBind(Intent arg0){
+
         return null;
     }
 
     @Override
     public void onCreate() {
-        Toast.makeText(this, "My Service Created",Toast.LENGTH_LONG).show();
-
+        super.onCreate();
         player = MediaPlayer.create(this, R.raw.music_main_0);
         player.setLooping(true);
     }
 
-    @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
-        Toast.makeText(this,"Service started", Toast.LENGTH_LONG).show();
+    public int onStartCommand(Intent intent, int flags, int startId){
         player.start();
-        return super.onStartCommand(intent, flags, startId);
+        return Service.START_STICKY;
+    }
+
+    public void onStart(Intent intent, int startId){
+
+    }
+
+    public IBinder onUnBind(Intent arg0){
+        return null;
+    }
+
+    public void onStop(){
+
+    }
+    public void onPause(){
+
     }
 
     @Override
     public void onDestroy() {
-        Toast.makeText(this,"Service stopped", Toast.LENGTH_LONG).show();
         player.stop();
-        super.onDestroy();
+        player.release();
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
     }
 }

@@ -49,7 +49,8 @@ public class MainActivity extends AppCompatActivity {
         setOnTouch(imageAboutUs);
         setOnTouch(imageSound);
 
-        //startService(new Intent(this, MyMusicService.class));
+        Intent svc = new Intent(this, MyMusicService.class);
+        startService(svc);
 
     }
 
@@ -97,6 +98,17 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed() {
         stopService(new Intent(this, MyMusicService.class));
         super.onBackPressed();
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if(!hasFocus){
+            stopService(new Intent(this, MyMusicService.class));
+        }
+        else{
+            startService(new Intent(this, MyMusicService.class));
+        }
     }
 
     @Override
