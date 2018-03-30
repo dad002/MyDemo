@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     ImageView imageGallery;
     ImageView imageAboutUs;
     ImageView imageSound;
-    MyMusicService mmS = new MyMusicService();
+    int tmp = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +50,7 @@ public class MainActivity extends AppCompatActivity {
         setOnTouch(imageAboutUs);
         setOnTouch(imageSound);
 
-        Intent svc = new Intent(this, MyMusicService.class);
-        startService(svc);
+        startService(new Intent(this, MyMusicService.class));
 
     }
 
@@ -78,13 +77,14 @@ public class MainActivity extends AppCompatActivity {
                     view.clearAnimation();
                 break;
             case R.id.BSound:
-                    view.clearAnimation();
-                    if (mmS.play_index){
-                        mmS.onPause();
-                    }
-                    else {
-                        mmS.onRelease();
-                    }
+                if (MyMusicService.isPlaying()){
+                    MyMusicService.onPause();
+                    tmp = 0;
+                }
+                else {
+                    tmp = 1;
+                    MyMusicService.onStart();
+                }
                 break;
         }
     }
@@ -105,17 +105,6 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed() {
         stopService(new Intent(this, MyMusicService.class));
         super.onBackPressed();
-    }
-
-    @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        super.onWindowFocusChanged(hasFocus);
-        if(!hasFocus){
-            stopService(new Intent(this, MyMusicService.class));
-        }
-        else{
-            startService(new Intent(this, MyMusicService.class));
-        }
     }
 
     @Override
