@@ -17,7 +17,7 @@ import com.example.kolvir.test.FirstChapter.first_part_novel;
 import com.example.kolvir.test.Gallery.Gallery;
 import com.example.kolvir.test.Services.MyMusicService;
 
-//TODO 1. Анимация плохо работает с галреей + она глючит при обратном выходе из приложения
+//TODO 1. Анимация плохо работает с галреей
 //TODO 2. Разобраться с сервисами и делать паузу а не стоп при переходе в многозадачкость и когда сворачиваем
 
 
@@ -29,7 +29,9 @@ public class MainActivity extends AppCompatActivity {
     ImageView imageGallery;
     ImageView imageAboutUs;
     ImageView imageSound;
-    int tmp = 1;
+    Boolean isMusicNotNecessary;
+    Boolean isRealPause;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +54,9 @@ public class MainActivity extends AppCompatActivity {
 
         startService(new Intent(this, MyMusicService.class));
 
+        Log.i(TAG, "onCreate");
+        isMusicNotNecessary = true;
+        isRealPause = false;
     }
 
     public void onClick(View view){
@@ -72,18 +77,19 @@ public class MainActivity extends AppCompatActivity {
                     intent = new Intent(this,Gallery.class);
                     view.clearAnimation();
                     startActivity(intent);
+                    isMusicNotNecessary = false;
                 break;
             case R.id.BOptions:
                     view.clearAnimation();
+                    isMusicNotNecessary = false;
                 break;
             case R.id.BSound:
-                if (MyMusicService.isPlaying()){
+                if (MyMusicService.isPlaying()) {
                     MyMusicService.onPause();
-                    tmp = 0;
-                }
-                else {
-                    tmp = 1;
+                    isRealPause = true;
+                }else {
                     MyMusicService.onStart();
+                    isRealPause = false;
                 }
                 break;
         }
@@ -102,26 +108,46 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed() {
-        stopService(new Intent(this, MyMusicService.class));
-        super.onBackPressed();
+    protected void onDestroy() {
+        super.onDestroy();
+        stopService(new Intent(this,MyMusicService.class));
+        Log.i(TAG, "onDestroy");
     }
 
     @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_MENU){
-            Toast.makeText(this,"stop",Toast.LENGTH_SHORT).show();
-            stopService(new Intent(this, MyMusicService.class));
-        }
-        return super.onKeyDown(keyCode, event);
+    protected void onPause() {
+        super.onPause();
+
+        Log.i(TAG, "onPause");
     }
 
     @Override
-    public boolean onKeyLongPress(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_HOME) {
-            Toast.makeText(this,"yes",Toast.LENGTH_SHORT).show();
-            stopService(new Intent(this, MyMusicService.class));
-        }
-        return super.onKeyLongPress(keyCode, event);
+    protected void onStop() {
+        super.onStop();
+        if(isMusicNotNecessary) MyMusicService.onPause();
+
+        Log.i(TAG, "onStop");
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        Log.i(TAG, "onStart");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        Log.i(TAG, "onResume");
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        if(isMusicNotNecessary && !isRealPause) MyMusicService.onStart();
+        isMusicNotNecessary = true;
+        Log.i(TAG, "onRestart");
     }
 }
