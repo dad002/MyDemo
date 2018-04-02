@@ -10,7 +10,10 @@
         <item name="android:windowContentOverlay">@null</item>
         <item name="windowNoTitle">true</item>
     </style>
+    <style name = "AppTheme.Launcher">
+        <item name="android:windowBackground">@drawable/launch_screen</item>
 
+    </style>
     <style name="FullscreenTheme" parent="AppTheme">
         <item name="android:actionBarStyle">@style/FullscreenActionBarStyle</item>
         <item name="android:windowActionBarOverlay">true</item>
