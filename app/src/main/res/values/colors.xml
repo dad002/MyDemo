@@ -5,4 +5,5 @@
     <color name="colorAccent">#FF4081</color>
     <color name="colorGrey">#787979</color>
     <color name="black_overlay">#66000000</color>
+    <color name="splashClassic">#343B29</color>
 </resources>
