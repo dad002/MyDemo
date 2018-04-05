@@ -9,10 +9,14 @@ import android.widget.Toast;
 
 import com.example.kolvir.test.R;
 
+import java.util.Random;
+
 
 public class MyMusicService extends Service{
 
     static MediaPlayer player;
+    private int index = 0;
+    String TAG = "RVINFO";
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -22,9 +26,25 @@ public class MyMusicService extends Service{
     @Override
     public void onCreate() {
         Toast.makeText(this, "My Service Created",Toast.LENGTH_LONG).show();
+        Random r = new Random();
+        r.nextInt(2);
+        switch (index){
 
-        player = MediaPlayer.create(this, R.raw.music_main_0);
+            case 0:
+                player = MediaPlayer.create(this, R.raw.music_main_0);
+                Log.i(TAG,"music_0_start");
+                break;
+            case 1:
+                player = MediaPlayer.create(this, R.raw.music_main_1);
+                Log.i(TAG, "music_1_start");
+                break;
+            case 2:
+                player = MediaPlayer.create(this, R.raw.music_main_2);
+                Log.i(TAG, "music_2_start");
+                break;
+        }
         player.setLooping(true);
+
         Log.i("RVINFO", "ServiceOnCreate");
     }
 
