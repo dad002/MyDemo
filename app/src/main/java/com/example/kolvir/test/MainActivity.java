@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         imagePlay = findViewById(R.id.BPlay);
         imageContinue = findViewById(R.id.BContinue);
         imageGallery = findViewById(R.id.BGallery);
-        imageAboutUs = findViewById(R.id.BOptions);
+        imageAboutUs = findViewById(R.id.BAboutUs);
         imageSound = findViewById(R.id.BSound);
 
         setOnTouch(imagePlay);
@@ -79,8 +79,10 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
                 isMusicNotNecessary = false;
                 break;
-            case R.id.BOptions:
+            case R.id.BAboutUs:
+                intent = new Intent(this, AboutUsActivity.class);
                 view.clearAnimation();
+                startActivity(intent);
                 isMusicNotNecessary = false;
                 break;
             case R.id.BSound:
