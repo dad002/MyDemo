@@ -13,27 +13,31 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity
             android:name=".SplashActivity"
-            andriod:theme="@style/AppTheme.Launcher"
+            andriod:theme="@style/SplashTheme"
             android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
+
         <activity
             android:name=".MainActivity"
             android:screenOrientation="landscape">
         </activity>
+
         <activity
             android:name=".FirstChapter.first_part_novel"
             android:screenOrientation="landscape" />
+
         <activity
             android:name=".FirstChapter.room_first"
             android:screenOrientation="landscape" />
+
         <activity
             android:name=".Gallery.Gallery"
             android:screenOrientation="landscape" />

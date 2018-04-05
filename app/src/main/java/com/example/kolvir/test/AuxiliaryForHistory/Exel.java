@@ -1,4 +1,4 @@
-package com.example.kolvir.test;
+package com.example.kolvir.test.AuxiliaryForHistory;
 
 import android.content.res.AssetManager;
 
@@ -21,6 +21,8 @@ public class Exel {
         } catch (IOException e){
             e.printStackTrace();
         }
+        row = 1;
+        cell = 1;
     }
 
     public String Print(int rowStatus){
@@ -59,8 +61,6 @@ public class Exel {
     }
 
     private String CreateResIndex(){
-        String res = wb.getSheetAt(sheet).getRow(row).getCell(cell).toString();
-
-        return res;
+        return wb.getSheetAt(sheet).getRow(row).getCell(cell).toString();
     }
 }

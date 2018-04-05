@@ -7,15 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import android.widget.TextView;
-
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.concurrent.TimeUnit;
-
-/**
- * Created by kolvir on 01.04.2018.
- */
 
 public class SplashActivity extends AppCompatActivity {
     private ImageView iv;

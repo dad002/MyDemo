@@ -9,7 +9,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.kolvir.test.Exel;
+import com.example.kolvir.test.AuxiliaryForHistory.DelayedPrinter;
+import com.example.kolvir.test.AuxiliaryForHistory.Exel;
 import com.example.kolvir.test.R;
 
 public class first_part_novel extends AppCompatActivity {
