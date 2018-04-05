@@ -9,14 +9,6 @@
         android:layout_height="match_parent"
         android:src="@drawable/splash"
         />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center_vertical"
-        android:text="Два товарища и немного порошка"
-        android:textSize="26dp"
-        android:textColor="#ff0000"
-        />
 
 
 </android.support.constraint.ConstraintLayout>
