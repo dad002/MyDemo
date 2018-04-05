@@ -10,6 +10,7 @@ import android.widget.ImageView;
 
 public class SplashActivity extends AppCompatActivity {
     private ImageView iv;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,14 +21,13 @@ public class SplashActivity extends AppCompatActivity {
         iv.startAnimation(tree_anim);
         final Intent intent = new Intent(this, MainActivity.class);
 
-        Thread timer = new Thread(){
-            public void run(){
+        Thread timer = new Thread() {
+            public void run() {
                 try {
                     sleep(5000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
-                }
-                finally {
+                } finally {
                     startActivity(intent);
                     finish();
                 }

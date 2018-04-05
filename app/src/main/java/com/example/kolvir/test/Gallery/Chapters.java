@@ -10,10 +10,20 @@ public class Chapters {
     private String Name;
     private Integer Image;
 
-    public Chapters(String name, Integer id){
+    public Chapters(String name, Integer id) {
         Name = name;
         Image = id;
 
+    }
+
+    public static List<Chapters> getChapters() {
+        ArrayList<Chapters> items = new ArrayList<>();
+
+        items.add(new Chapters("Chapter1", R.drawable.forfirst1));
+        items.add(new Chapters("Chapter2", R.drawable.forsecond1));
+        items.add(new Chapters("Chapter3", R.drawable.test1));
+
+        return items;
     }
 
     public Integer getImage() {
@@ -24,21 +34,11 @@ public class Chapters {
         this.Image = image;
     }
 
-    public void setName(String name) {
-        Name = name;
-    }
-
     public String getName() {
         return Name;
     }
 
-    public static List<Chapters> getChapters(){
-        ArrayList<Chapters> items = new ArrayList<>();
-
-        items.add(new Chapters("Chapter1", R.drawable.forfirst1));
-        items.add(new Chapters("Chapter2", R.drawable.forsecond1));
-        items.add(new Chapters("Chapter3", R.drawable.test1));
-
-        return items;
+    public void setName(String name) {
+        Name = name;
     }
 }

@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        animButton = AnimationUtils.loadAnimation(this,R.anim.button_anim);
+        animButton = AnimationUtils.loadAnimation(this, R.anim.button_anim);
         startService(new Intent(this, MyMusicService.class));
 
         imagePlay = findViewById(R.id.BPlay);
@@ -58,36 +58,36 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void onClick(View view){
+    public void onClick(View view) {
         Intent intent;
 
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.BPlay:
-                    intent = new Intent(this,first_part_novel.class);
-                    view.clearAnimation();
-                    startActivity(intent);
-                    overridePendingTransition(R.anim.botton_in,R.anim.top_out);
+                intent = new Intent(this, first_part_novel.class);
+                view.clearAnimation();
+                startActivity(intent);
+                overridePendingTransition(R.anim.botton_in, R.anim.top_out);
                 break;
             case R.id.BContinue:
-                    view.clearAnimation();
-                    //TODO позволяет сделать выбор комнаты с которой надо будет начать
+                view.clearAnimation();
+                //TODO позволяет сделать выбор комнаты с которой надо будет начать
                 break;
             case R.id.BGallery:
-                Log.i(TAG,"GOGOGO");
-                    intent = new Intent(this,Gallery.class);
-                    view.clearAnimation();
-                    startActivity(intent);
-                    isMusicNotNecessary = false;
+                Log.i(TAG, "GOGOGO");
+                intent = new Intent(this, Gallery.class);
+                view.clearAnimation();
+                startActivity(intent);
+                isMusicNotNecessary = false;
                 break;
             case R.id.BOptions:
-                    view.clearAnimation();
-                    isMusicNotNecessary = false;
+                view.clearAnimation();
+                isMusicNotNecessary = false;
                 break;
             case R.id.BSound:
                 if (MyMusicService.isPlaying()) {
                     MyMusicService.onPause();
                     isRealPause = true;
-                }else {
+                } else {
                     MyMusicService.onStart();
                     isRealPause = false;
                 }
@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void setOnTouch(View v){
+    private void setOnTouch(View v) {
         v.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        stopService(new Intent(this,MyMusicService.class));
+        stopService(new Intent(this, MyMusicService.class));
 
         Log.i(TAG, "onDestroy");
     }
@@ -126,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        if(isMusicNotNecessary) MyMusicService.onPause();
+        if (isMusicNotNecessary) MyMusicService.onPause();
 
         Log.i(TAG, "onStop");
     }
@@ -149,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onRestart() {
         super.onRestart();
 
-        if(isMusicNotNecessary && !isRealPause) MyMusicService.onStart();
+        if (isMusicNotNecessary && !isRealPause) MyMusicService.onStart();
         isMusicNotNecessary = true;
 
         Log.i(TAG, "onRestart");

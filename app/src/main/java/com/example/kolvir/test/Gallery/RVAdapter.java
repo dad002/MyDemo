@@ -1,34 +1,34 @@
 package com.example.kolvir.test.Gallery;
 
 import android.content.Context;
-        import android.support.annotation.NonNull;
-        import android.support.v7.widget.RecyclerView;
-        import android.util.Log;
-        import android.view.LayoutInflater;
-        import android.view.View;
-        import android.view.ViewGroup;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
-        import android.widget.TextView;
+import android.widget.TextView;
 
-        import com.bumptech.glide.Glide;
+import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.kolvir.test.R;
 
-        import java.util.ArrayList;
-        import java.util.List;
+import java.util.ArrayList;
+import java.util.List;
 
-public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PhotosViewHolder>{
+public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PhotosViewHolder> {
 
     private Context cont;
     private String TAGRV = "RVINFO";
     private List<Chapters> chaptersList = new ArrayList<>();
 
-    public RVAdapter(Context context){
+    public RVAdapter(Context context) {
         cont = context;
     }
 
-     public  void addAll(List<Chapters> chapters){
-        Log.i(TAGRV,"InAddAll");
+    public void addAll(List<Chapters> chapters) {
+        Log.i(TAGRV, "InAddAll");
 
         int pos = getItemCount();
         this.chaptersList.addAll(chapters);
@@ -39,14 +39,14 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PhotosViewHolder>{
     @Override
     public RVAdapter.PhotosViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        Log.i(TAGRV,"InRVAdapter");
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_main, parent,false);
+        Log.i(TAGRV, "InRVAdapter");
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_main, parent, false);
         return new RVAdapter.PhotosViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RVAdapter.PhotosViewHolder holder, int position) {
-        Log.i(TAGRV,"InBindViewHolder");
+        Log.i(TAGRV, "InBindViewHolder");
         holder.bind(chaptersList.get(position));
 
         holder.images.setAlpha(0f);
@@ -66,14 +66,13 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PhotosViewHolder>{
 
         public PhotosViewHolder(View itemView) {
             super(itemView);
-            Log.i(TAGRV,"InPhotosViewHolder");
-            name =  itemView.findViewById(R.id.title);
-            images =  itemView.findViewById(R.id.image);
+            Log.i(TAGRV, "InPhotosViewHolder");
+            name = itemView.findViewById(R.id.title);
+            images = itemView.findViewById(R.id.image);
         }
 
 
-
-        public void bind(Chapters chapters){
+        public void bind(Chapters chapters) {
 
             Glide
                     .with(cont)

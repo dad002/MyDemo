@@ -43,7 +43,7 @@ public class first_part_novel extends AppCompatActivity {
 
             String[] strings = getTextFromExcel(0).split("%");
             DelayedPrinter.setIsRunning(false);
-            switch (strings[0]){
+            switch (strings[0]) {
                 case "0.0":
                     nameText.setText(strings[1]);
                     mainText.setText(strings[2]);

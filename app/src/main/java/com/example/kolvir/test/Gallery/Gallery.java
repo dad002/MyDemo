@@ -15,7 +15,6 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.example.kolvir.test.R;
-import com.example.kolvir.test.Services.MyMusicService;
 
 public class Gallery extends AppCompatActivity {
 
@@ -29,7 +28,7 @@ public class Gallery extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gallery);
 
-        Log.i(TAGRV,"InGallery");
+        Log.i(TAGRV, "InGallery");
         recyclerView = findViewById(R.id.rv);
         recyclerView.setHasFixedSize(true);
 
@@ -47,7 +46,7 @@ public class Gallery extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         adapter.addAll(Chapters.getChapters());
 
-        llm = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false);
+        llm = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(llm);
 
     }
