@@ -18,15 +18,17 @@ import java.util.concurrent.TimeUnit;
  */
 
 public class SplashActivity extends AppCompatActivity {
-private ImageView iv;
+    private ImageView iv;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_splash);
         iv = (ImageView) findViewById(R.id.splash_tree);
         Animation tree_anim = AnimationUtils.loadAnimation(this, R.anim.splash_anim);
         iv.startAnimation(tree_anim);
         final Intent intent = new Intent(this, MainActivity.class);
+
         Thread timer = new Thread(){
             public void run(){
                 try {
@@ -42,6 +44,4 @@ private ImageView iv;
         };
         timer.start();
     }
-
-
 }

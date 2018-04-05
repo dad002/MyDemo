@@ -11,35 +11,36 @@ public class Exel {
     private int row;
     private int cell;
     private int sheet;
-
     private HSSFWorkbook wb = null;
 
     public Exel(AssetManager am,int chapterName) throws Exception {
+        sheet = chapterName;
 
         try{
             wb = new HSSFWorkbook(am.open("exel.xls"));
         } catch (IOException e){
             e.printStackTrace();
         }
-
-        sheet = chapterName;
     }
 
     public String Print(int rowStatus){
         if (rowStatus == 1) row -= 1;
+
         if (row < 0) row = 0;
+
         String acIndex = CreateResIndex();
 
         String res = acIndex + "%" +CreateNames() + "%" + CreateMessage();
+
         if (!acIndex.equals("3.0")){
             row+=1;
         }
-
         return res;
     }
 
     private String CreateNames(){
         String res = wb.getSheetAt(sheet).getRow(row).getCell(cell+1).toString();
+
         if (res == null){
             return " ";
         }else{
@@ -59,6 +60,7 @@ public class Exel {
 
     private String CreateResIndex(){
         String res = wb.getSheetAt(sheet).getRow(row).getCell(cell).toString();
+
         return res;
     }
 }
