@@ -21,8 +21,6 @@ public class Exel {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        row = 1;
-        cell = 1;
     }
 
     public String Print(int rowStatus) {

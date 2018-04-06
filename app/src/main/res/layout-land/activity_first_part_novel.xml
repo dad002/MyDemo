@@ -21,7 +21,7 @@
     <fragment
         android:id="@+id/text_fragment"
         android:name="com.example.kolvir.test.FirstChapter.text_fragment"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="120dp"
         android:layout_marginTop="300dp"
         app:layout_constraintBottom_toBottomOf="@+id/image_fragmet"
