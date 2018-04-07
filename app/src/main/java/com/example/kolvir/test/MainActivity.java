@@ -4,7 +4,9 @@ package com.example.kolvir.test;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
@@ -16,10 +18,12 @@ import com.example.kolvir.test.Gallery.Gallery;
 import com.example.kolvir.test.Services.MyMusicService;
 
 //TODO 1. Анимация плохо работает с галреей
-//TODO 2. Разобраться с сервисами и делать паузу а не стоп при переходе в многозадачкость и когда сворачиваем
 
 
 public class MainActivity extends AppCompatActivity {
+
+    Integer WIDTH;
+    Integer HEIGHT;
     String TAG = "RVINFO";
     Animation animButton;
     ImageView imagePlay;
@@ -38,6 +42,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         animButton = AnimationUtils.loadAnimation(this, R.anim.button_anim);
         startService(new Intent(this, MyMusicService.class));
+
+        Display display = getWindowManager().getDefaultDisplay();
+        DisplayMetrics metrics = new DisplayMetrics();
+        display.getMetrics(metrics);
+
+        WIDTH = metrics.widthPixels;
+        HEIGHT = metrics.heightPixels;
 
         imagePlay = findViewById(R.id.BPlay);
         imageContinue = findViewById(R.id.BContinue);

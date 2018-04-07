@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
+import android.view.Display;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -15,6 +17,9 @@ import com.example.kolvir.test.R;
 
 public class first_part_novel extends AppCompatActivity {
 
+    Integer WIDTH;
+    Integer HEIGHT;
+
     ImageView im;
     TextView mainText;
     TextView nameText;
@@ -24,6 +29,13 @@ public class first_part_novel extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first_part_novel);
+
+        Display display = getWindowManager().getDefaultDisplay();
+        DisplayMetrics metrics = new DisplayMetrics();
+        display.getMetrics(metrics);
+
+        WIDTH = metrics.widthPixels;
+        HEIGHT = metrics.heightPixels;
 
         AssetManager am = this.getAssets();
 
