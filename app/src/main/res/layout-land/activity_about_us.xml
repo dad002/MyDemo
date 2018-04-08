@@ -9,13 +9,12 @@
 
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/img1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:scaleType="fitXY"
         app:layout_constraintStart_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="parent"
-        app:srcCompat="@mipmap/gallery_back" />
+        app:layout_constraintTop_toBottomOf="parent" />
 
     <TextView
         android:id="@+id/textView4"
@@ -26,8 +25,8 @@
         android:text="Artemiy Ryabov"
         android:textSize="26dp"
         android:textColor="#ffffff"
-        app:layout_constraintStart_toStartOf="@+id/imageView"
-        app:layout_constraintTop_toTopOf="@+id/imageView" />
+        app:layout_constraintStart_toStartOf="@+id/img1"
+        app:layout_constraintTop_toTopOf="@+id/img1" />
 
     <TextView
         android:id="@+id/textView5"
@@ -38,7 +37,7 @@
         android:text="Mikhail Kulikov"
         android:textSize="26dp"
         android:textColor="#ffffff"
-        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintStart_toStartOf="@+id/img1"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <TextView
@@ -50,7 +49,7 @@
         android:text="And Third Faces"
         android:textColor="#ffffff"
         android:textSize="26dp"
-        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintStart_toStartOf="@+id/img1"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
     <TextView
@@ -61,8 +60,8 @@
         android:layout_marginEnd="16dp"
         android:text="Copyright 2018. All Rights Received."
         android:textColor="#ffffff"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView"
-        app:layout_constraintEnd_toEndOf="@+id/imageView" />
+        app:layout_constraintBottom_toBottomOf="@+id/img1"
+        app:layout_constraintEnd_toEndOf="@+id/img1" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -70,7 +69,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="40dp"
         android:layout_marginTop="40dp"
-        app:layout_constraintEnd_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toTopOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="@+id/img1"
+        app:layout_constraintTop_toTopOf="@+id/img1"
         app:srcCompat="@drawable/logo" />
 </android.support.constraint.ConstraintLayout>

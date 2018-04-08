@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-//TODO еблан
 public class SplashActivity extends AppCompatActivity {
     private ImageView iv;
     private Thread timer;
