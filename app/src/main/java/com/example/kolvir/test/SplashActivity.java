@@ -59,5 +59,6 @@ public class SplashActivity extends AppCompatActivity {
             }
         };
         timer.start();
+        Log.i("RVINFO", "onCreate_splash");
     }
 }
